@@ -118,3 +118,5 @@ dmypy.json
 
 # random
 notes
+*.sublime-project
+*.sublime-workspace
