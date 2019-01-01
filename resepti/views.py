@@ -1,6 +1,5 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.template import loader
 from .models import Recipe, Step
 
 
@@ -14,10 +13,11 @@ def detail(request, recipe_id):
 
 def recipe_list(request):
     recipes = Recipe.objects.all()
-    steps = Step.objects.filter(recipe__name="spaghetti aglio e olio")
-    template = loader.get_template('resepti/index.html')
+    categories = set()
+    for recipe in recipes:
+        categories.add(recipe.category)
     context = {
         'recipes': recipes,
-        'steps': steps
+        'categories': categories
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'resepti/recipe_list.html', context)

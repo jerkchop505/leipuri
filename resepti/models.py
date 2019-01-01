@@ -8,6 +8,12 @@ class Ingredient(models.Model):
     weight = models.IntegerField(null=True)
     # 1 volume unit is 1 milliliter
     volume = models.IntegerField(null=True)
+    quantity = models.DecimalField(
+        decimal_places=2,
+        max_digits=7,
+        null=True
+    )
+    recipe = models.ForeignKey('Recipe', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name
@@ -15,7 +21,7 @@ class Ingredient(models.Model):
 
 class Step(models.Model):
     number = models.IntegerField()
-    text = models.CharField(max_length=255)
+    text = models.TextField(max_length=255)
     recipe = models.ForeignKey('Recipe', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
@@ -26,7 +32,6 @@ class Recipe(models.Model):
     name = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
     servings = models.IntegerField()
-    ingredients = models.ManyToManyField(Ingredient)
 
     def __str__(self):
         return self.name

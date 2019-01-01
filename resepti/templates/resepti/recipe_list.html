@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Index</title>
+</head>
+<body>
+    <div>
+        {% for category in categories %}
+            <h1>{{ category }}</h1>
+            {% for recipe in recipes %}
+                <h3>
+                    {% if recipe.category == category %}
+                    <a href="">{{ recipe.name }}</a>
+                    {% endif %}
+                </h3>
+                <br>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</body>
+</html>
