@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe Index</title>
+</head>
+<body>
+    <div>
+        {% for recipe in recipes %}
+            <h2>{{ recipe.name }}</h2>
+            <br>
+            {% for step in steps %}
+               <h5> {{ step.number }}</h5> {{ step.text }} <br>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</body>
+</html>
