@@ -6,11 +6,11 @@
 <body>
     <div>
         {% for category in categories %}
-            <h1>{{ category }}</h1>
+            <h1>{{ category|title }}</h1>
             {% for recipe in recipes %}
                 <h3>
                     {% if recipe.category == category %}
-                    <a href="">{{ recipe.name }}</a>
+                    <a href="recipe/{{ recipe.id }}">{{ recipe.name|title }}</a>
                     {% endif %}
                 </h3>
                 <br>

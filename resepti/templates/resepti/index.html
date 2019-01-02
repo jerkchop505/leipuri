@@ -1,17 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Recipe Index</title>
+    <title>Homepage</title>
 </head>
 <body>
-    <div>
-        {% for recipe in recipes %}
-            <h2>{{ recipe.name }}</h2>
-            <br>
-            {% for step in steps %}
-               <h5> {{ step.number }}</h5> {{ step.text }} <br>
-            {% endfor %}
-        {% endfor %}
-    </div>
+    <a href="recipe_list">Click to go to the recipes!</a>
 </body>
 </html>
