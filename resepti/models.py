@@ -5,9 +5,11 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=255)
     itype = models.CharField(max_length=255)
     # 1 weight unit is 1 gram
-    weight = models.IntegerField(null=True)
-    # 1 volume unit is 1 milliliter
-    volume = models.IntegerField(null=True)
+    weight = models.DecimalField(
+        decimal_places=2,
+        max_digits=7,
+        null=True
+    )
     quantity = models.DecimalField(
         decimal_places=2,
         max_digits=7,

@@ -13,7 +13,8 @@
     </h3>
     <ul>
         {% for ingredient in ingredients %}
-            <li>{% firstof ingredient.quantity ingredient.volume ingredient.weight %} {{ingredient.name}}</li>
+            {# checks if its a weight or quantity and attaches the appropriate units. #}
+            <li>{%if ingredient.quantity%} {{ingredient.quantity}} {%elif ingredient.weight%}{{ingredient.weight}}g{%endif%} {{ingredient.name}}
         {% endfor %}
     </ul>
     <br>

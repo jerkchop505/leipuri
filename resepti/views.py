@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Recipe, Step, Ingredient
+from .forms import RecipeForm
 
 
 def index(request):
@@ -26,3 +27,17 @@ def recipe_list(request):
         'categories': categories
     }
     return render(request, 'resepti/recipe_list.html', context)
+
+
+def recipe_entry(request):
+    categories = ['appetizer', 'entree', 'side', 'bread', 'dessert']
+    context = {
+        'categories': categories
+    }
+    return render(request, 'resepti/entry_page.html', context)
+
+
+def recipe_create(request):
+    form = RecipeForm(request.POST)
+    if form.isValid():
+        print("yay")
