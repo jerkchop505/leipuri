@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import Recipe, Step, IngredAmount, Ingredient
-from .forms import RecipeForm, RecipeIForm
+from .models import Recipe, Step, IngredAmount
+from .forms import RecipeForm, RecipeIngredientForm, RecipeStepForm
 
 
 def index(request):
@@ -37,7 +37,7 @@ def recipe_entry(request):
         fd = form.cleaned_data
         r = Recipe(name=fd['name'], category=fd['category'], servings=fd['servings'])
         r.save()
-        return HttpResponseRedirect(reverse('ingredient_entry', args=(r.id,)))
+        return HttpResponseRedirect(reverse('recipe_edit', args=(r.id,)))
 
     context = {
         'form': form
@@ -45,25 +45,36 @@ def recipe_entry(request):
     return render(request, 'resepti/create_recipe.html', context)
 
 
-def ingredient_entry(request, recipe_id):
+def recipe_edit(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
     ingred_amounts = IngredAmount.objects.filter(recipe__id=recipe_id)
-    form = RecipeIForm(request.POST)
+    steps = Step.objects.filter(recipe__id=recipe_id)
+    i_form = RecipeIngredientForm(request.POST)
+    s_form = RecipeStepForm(request.POST)
     context = {
         'recipe': recipe,
         'ingred_amounts': ingred_amounts,
-        'form': form
+        'steps': steps,
+        'i_form': i_form,
+        "s_form": s_form
     }
-    if request.method == 'GET':
-        return render(request, 'resepti/add_ingredients_to_recipe.html', context)
     if request.method == 'POST':
-        if form.is_valid():
-            fd = form.cleaned_data
-            i = IngredAmount(
+        if i_form.is_valid():
+            fd = i_form.cleaned_data
+            amt = IngredAmount(
                 quantity=fd['quantity'],
                 weight=fd['weight'],
                 recipe=recipe,
                 ingredient=fd['ingredient']
             )
-            i.save()
-            return HttpResponseRedirect(reverse('ingredient_entry', args=(recipe.id,)))
+            amt.save()
+        if s_form.is_valid():
+            fd = s_form.cleaned_data
+            step = Step(
+                number=fd['number'],
+                text=fd['text'],
+                recipe=recipe
+            )
+            step.save()
+        return HttpResponseRedirect(reverse('recipe_edit', args=(recipe.id,)))
+    return render(request, 'resepti/add_elements_to_recipe.html', context)

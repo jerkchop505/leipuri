@@ -8,7 +8,12 @@ class RecipeForm(forms.Form):
     servings = forms.IntegerField(label='servings')
 
 
-class RecipeIForm(forms.Form):
+class RecipeIngredientForm(forms.Form):
     ingredient = forms.ModelChoiceField(Ingredient.objects.all())
     quantity = forms.DecimalField(min_value=0, decimal_places=2, label='quantity', required=False)
     weight = forms.DecimalField(min_value=0, decimal_places=2, label='weight', required=False)
+
+
+class RecipeStepForm(forms.Form):
+    number = forms.IntegerField(min_value=0, label='number')
+    text = forms.CharField()

@@ -7,6 +7,11 @@
     <h1>
         {{recipe.name|title}}
     </h1>
+    <div>
+        <form action="{% url 'recipe_edit' recipe.id %}" method="get">
+            <input type="Submit" name="Edit" value="Edit Recipe">
+        </form>
+    </div>
 
     <h3>
         Ingredients
@@ -26,5 +31,10 @@
             <li>{{step.text}}</li>
         {% endfor %}
     </ol>
+    <div>
+        <form action="{% url 'recipe_list' %}" method="get">
+            <input type="Submit" name="Back" value="Go back">
+        </form>
+    </div>
 </body>
 </html>
