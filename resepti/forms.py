@@ -15,5 +15,4 @@ class RecipeIngredientForm(forms.Form):
 
 
 class RecipeStepForm(forms.Form):
-    number = forms.IntegerField(min_value=0, label='number')
     text = forms.CharField()

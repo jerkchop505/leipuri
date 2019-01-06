@@ -70,8 +70,9 @@ def recipe_edit(request, recipe_id):
             amt.save()
         if s_form.is_valid():
             fd = s_form.cleaned_data
+            high_num = 0 if len(steps) == 0 else steps.order_by('-number')[0].number
             step = Step(
-                number=fd['number'],
+                number=high_num + 1,
                 text=fd['text'],
                 recipe=recipe
             )
