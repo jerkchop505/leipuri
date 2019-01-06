@@ -34,11 +34,11 @@ class IngredAmount(models.Model):
     ingredient = models.ForeignKey('Ingredient', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        if (self.ing.weight is None):
-            ingred = str(self.ing.quantity) + " "
+        if (self.weight is None):
+            ingred = str(self.quantity) + " "
         else:
-            ingred = str(self.ing.weight) + "g "
-        return ingred + self.ing.name
+            ingred = str(self.weight) + "g "
+        return ingred + self.ingredient.name
 
 
 class Recipe(models.Model):

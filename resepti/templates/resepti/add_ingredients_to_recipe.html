@@ -14,8 +14,11 @@
             Ingredients in recipe:
         </h3>
         {% for ingred in ingred_amounts %}
-            <div>{{ ingred.quantity }}</div>
-            <div>{{ ingred.ingredient.name }}</div>
+            {% if ingred.quantity > 0 %}
+                <div>{{ ingred.quantity }}:  {{ ingred.ingredient.name }}</div>
+            {% elif ingred.weight > 0 %}
+                <div>{{ ingred.weight }}g:  {{ingred.ingredient.name }}</div>
+            {% endif %}
         {% endfor %}
     </div>
     <div>
