@@ -20,7 +20,7 @@ from . import views
 urlpatterns = [
     path('', views.index),
     path('recipe_list', views.recipe_list),
-    path('recipe/<int:recipe_id>/', views.detail),
+    path('recipe/<int:recipe_id>/', views.detail, name="recipe_detail"),
     path('recipe_entry', views.recipe_entry),
-    path('recipe_create', views.recipe_create)
+    # path('recipe/<int:recipe_id>', views.recipe_create, name="recipe_create")
 ]

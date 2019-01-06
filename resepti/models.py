@@ -36,4 +36,4 @@ class Recipe(models.Model):
     servings = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return self.name + ", " + str(self.servings) + " servings"

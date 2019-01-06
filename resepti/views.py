@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import Recipe, Step, Ingredient
 from .forms import RecipeForm
 
@@ -31,13 +33,22 @@ def recipe_list(request):
 
 def recipe_entry(request):
     categories = ['appetizer', 'entree', 'side', 'bread', 'dessert']
+
+    form = RecipeForm(request.POST)
+    if form.is_valid():
+        fd = form.cleaned_data
+        r = Recipe(name=fd['name'], category=fd['category'], servings=fd['servings'])
+        r.save()
+        return HttpResponseRedirect(reverse('recipe_detail', args=(r.id,)))
+
     context = {
-        'categories': categories
+        'categories': categories,
+        'form': form
     }
     return render(request, 'resepti/entry_page.html', context)
 
 
-def recipe_create(request):
+def recipe_create(request, recipe_id):
     form = RecipeForm(request.POST)
     if form.isValid():
         print("yay")
