@@ -14,7 +14,7 @@
     <ul>
         {% for ingredient in ingredients %}
             {# checks if its a weight or quantity and attaches the appropriate units. #}
-            <li>{%if ingredient.quantity%} {{ingredient.quantity}} {%elif ingredient.weight%}{{ingredient.weight}}g{%endif%} {{ingredient.ing.name}}
+            <li>{%if ingredient.quantity%} {{ingredient.quantity}} {%elif ingredient.weight%}{{ingredient.weight}}g{%endif%} {{ingredient.ingredient.name}}
         {% endfor %}
     </ul>
     <br>

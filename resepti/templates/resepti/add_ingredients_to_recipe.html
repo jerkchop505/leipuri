@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Ingredients to {{ recipe.name|title }}</title>
+</head>
+<body>
+    <div>
+        <h1>
+            {{ recipe.name|title }}
+        </h1>
+    </div>
+    <div>
+        <h3>
+            Ingredients in recipe:
+        </h3>
+        {% for ingred in ingred_amounts %}
+            <div>{{ ingred.quantity }}</div>
+            <div>{{ ingred.ingredient.name }}</div>
+        {% endfor %}
+    </div>
+    <div>
+        <h3>
+            Ingredients to add:
+        </h3>
+        <div>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="Submit" name="add-ingredient" value="Add Ingredient">
+            </form>
+        </div>
+        <form action="{% url 'recipe_detail' recipe.id %}">
+            <input type="Submit" value="Done">
+        </form>
+        
+    </div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import Recipe, Step, IngredAmount
+from .models import Recipe, Step, IngredAmount, Ingredient
 from .forms import RecipeForm, RecipeIForm
 
 
@@ -32,21 +32,38 @@ def recipe_list(request):
 
 
 def recipe_entry(request):
-    categories = ['appetizer', 'entree', 'side', 'bread', 'dessert']
-
     form = RecipeForm(request.POST)
-    i_form = RecipeIForm(request.POST)
-    if form.is_valid() and i_form.is_valid():
+    if form.is_valid():
         fd = form.cleaned_data
-        fdi = i_form.cleaned_data
-        print(fdi)
         r = Recipe(name=fd['name'], category=fd['category'], servings=fd['servings'])
         r.save()
-        return HttpResponseRedirect(reverse('recipe_detail', args=(r.id,)))
+        return HttpResponseRedirect(reverse('ingredient_entry', args=(r.id,)))
 
     context = {
-        'categories': categories,
-        'form': form,
-        'i_form': i_form
+        'form': form
     }
     return render(request, 'resepti/create_recipe.html', context)
+
+
+def ingredient_entry(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+    ingred_amounts = IngredAmount.objects.filter(recipe__id=recipe_id)
+    form = RecipeIForm(request.POST)
+    context = {
+        'recipe': recipe,
+        'ingred_amounts': ingred_amounts,
+        'form': form
+    }
+    if request.method == 'GET':
+        return render(request, 'resepti/add_ingredients_to_recipe.html', context)
+    if request.method == 'POST':
+        if form.is_valid():
+            fd = form.cleaned_data
+            i = IngredAmount(
+                quantity=fd['quantity'],
+                weight=fd['weight'],
+                recipe=recipe,
+                ingredient=fd['ingredient']
+            )
+            i.save()
+            return HttpResponseRedirect(reverse('ingredient_entry', args=(recipe.id,)))

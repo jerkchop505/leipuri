@@ -22,5 +22,5 @@ urlpatterns = [
     path('recipe_list', views.recipe_list),
     path('recipe/<int:recipe_id>/', views.detail, name="recipe_detail"),
     path('recipe_entry', views.recipe_entry),
-    # path('recipe/<int:recipe_id>', views.recipe_create, name="recipe_create")
+    path('recipe/<int:recipe_id>/ingredients', views.ingredient_entry, name="ingredient_entry")
 ]

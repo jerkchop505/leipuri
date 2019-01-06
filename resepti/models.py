@@ -31,7 +31,7 @@ class IngredAmount(models.Model):
         null=True
     )
     recipe = models.ForeignKey('Recipe', on_delete=models.SET_NULL, null=True)
-    ing = models.ForeignKey('Ingredient', on_delete=models.SET_NULL, null=True)
+    ingredient = models.ForeignKey('Ingredient', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         if (self.ing.weight is None):
@@ -47,4 +47,4 @@ class Recipe(models.Model):
     servings = models.IntegerField()
 
     def __str__(self):
-        return self.name + ", " + str(self.servings) + " servings"
+        return self.name

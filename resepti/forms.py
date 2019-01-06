@@ -9,9 +9,6 @@ class RecipeForm(forms.Form):
 
 
 class RecipeIForm(forms.Form):
-    i_list = Ingredient.objects.all()
-    choices = []
-    for ingredient in i_list:
-        choices.append((ingredient.name[0:2], ingredient.name))
-    ingredient = forms.ChoiceField(choices=choices, label='ingredient')
-    quantity = forms.DecimalField(min_value=0, decimal_places=2, label='quantity')
+    ingredient = forms.ModelChoiceField(Ingredient.objects.all())
+    quantity = forms.DecimalField(min_value=0, decimal_places=2, label='quantity', required=False)
+    weight = forms.DecimalField(min_value=0, decimal_places=2, label='weight', required=False)

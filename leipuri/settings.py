@@ -81,7 +81,10 @@ DATABASES = {
         'USER': 'monty',
         'PASSWORD': 'some_pass',
         'HOST': 'localhost',
-        'PORT': '3306'
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'traditional'
+        }
     }
 }
 
