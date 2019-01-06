@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import Recipe, Step, Ingredient
-from .forms import RecipeForm
+from .models import Recipe, Step, IngredAmount
+from .forms import RecipeForm, RecipeIForm
 
 
 def index(request):
@@ -11,7 +11,7 @@ def index(request):
 
 def detail(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
-    ingredients = Ingredient.objects.filter(recipe__id=recipe_id)
+    ingredients = IngredAmount.objects.filter(recipe__id=recipe_id)
     steps = Step.objects.filter(recipe__id=recipe_id)
     context = {
         'recipe': recipe,
@@ -35,20 +35,18 @@ def recipe_entry(request):
     categories = ['appetizer', 'entree', 'side', 'bread', 'dessert']
 
     form = RecipeForm(request.POST)
-    if form.is_valid():
+    i_form = RecipeIForm(request.POST)
+    if form.is_valid() and i_form.is_valid():
         fd = form.cleaned_data
+        fdi = i_form.cleaned_data
+        print(fdi)
         r = Recipe(name=fd['name'], category=fd['category'], servings=fd['servings'])
         r.save()
         return HttpResponseRedirect(reverse('recipe_detail', args=(r.id,)))
 
     context = {
         'categories': categories,
-        'form': form
+        'form': form,
+        'i_form': i_form
     }
-    return render(request, 'resepti/entry_page.html', context)
-
-
-def recipe_create(request, recipe_id):
-    form = RecipeForm(request.POST)
-    if form.isValid():
-        print("yay")
+    return render(request, 'resepti/create_recipe.html', context)

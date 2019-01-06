@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Entry page</title>
+</head>
+<body>
+    You've reached the entry page.
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div>
+                {{ field.label }}
+                {{ field }}
+            </div>
+        {% endfor %}
+        <div>
+            {{ i_form.ingredient.label }}
+            {{ i_form.ingredient}}
+        </div>
+        <div>
+            {{ i_form.ingredient.label }}
+            {{ i_form.ingredient}}
+        </div>
+        <input type="Submit" value="Create">
+    </form>
+</body>
+</html>
