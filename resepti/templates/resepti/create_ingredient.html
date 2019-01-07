@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add new ingredient</title>
+</head>
+<body>
+    <div>
+    <form action="{% url ingredient_list %}" method="get">
+        <input type="Submit" value="Back">
+    </form>
+        <form action="" method="post">
+        {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    {{ field.label }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <div>
+                <input type="Submit" value="Create">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

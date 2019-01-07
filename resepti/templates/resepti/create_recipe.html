@@ -4,7 +4,9 @@
     <title>Entry page</title>
 </head>
 <body>
-    You've reached the entry page.
+    <form action="{% url recipe_list %}" method="get">
+        <input type="Submit" value="Back">
+    </form>
     <form action="" method="post">
         {% csrf_token %}
         {% for field in form %}

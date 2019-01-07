@@ -3,7 +3,15 @@ from django.db import models
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=255)
-    itype = models.CharField(max_length=255)
+    category = models.CharField(max_length=255)
+    # grams per centimeter cubed
+    density = models.DecimalField(
+        decimal_places=8,
+        max_digits=12,
+        null=True
+    )
+    calories_per_gram = models.IntegerField(default=0)
+    calories_per_each = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

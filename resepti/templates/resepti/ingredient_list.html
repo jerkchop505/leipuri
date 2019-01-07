@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ingredient Index</title>
+</head>
+<body>
+    <div>
+        {% for category in categories %}
+            <h1>{{ category|title }}</h1>
+            {% for ingredient in ingredients %}
+                <h3>
+                    {% if ingredient.category == category %}
+                    <a href="ingredient/{{ ingredient.id }}">{{ ingredient.name|title }}</a>
+                    {% endif %}
+                </h3>
+                <br>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</body>
+</html>
