@@ -10,8 +10,8 @@ class Ingredient(models.Model):
         max_digits=12,
         null=True
     )
-    calories_per_gram = models.IntegerField(default=0)
-    calories_per_each = models.IntegerField(default=0)
+    calories_per_gram = models.IntegerField(default=0, null=True)
+    calories_per_each = models.IntegerField(default=0, null=True)
 
     def __str__(self):
         return self.name

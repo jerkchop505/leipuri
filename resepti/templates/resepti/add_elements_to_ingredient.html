@@ -9,5 +9,36 @@
             {{ ingredient.name|title }}
         </h1>
     </div>
+    <div>
+        <h3>
+            Ingredient info:
+        </h3>
+        <div>
+            Category: {{ ingredient.category }}
+        </div>
+        <div>
+            {{ ingredient.density }} g/ml3
+        </div>
+        {% if ingredient.calories_per_each %}
+            <div>{{ ingredient.calories_per_each }} calories per each {{ ingredient.name }}</div>
+        {% else %}
+            <div>{{ ingredient.calories_per_gram }} calories per gram</div>
+        {% endif %}
+    </div>
+    <div>
+        <h3>
+            Data to change:
+        </h3>
+    </div>
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    {{ field.label }}: {{ field }} </div>
+            {% endfor %}
+            <input type="Submit" name="edit-ingredient" value="Edit Ingredient">
+        </form>
+    </div>
 </body>
 </html>
