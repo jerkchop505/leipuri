@@ -19,7 +19,15 @@ class RecipeStepForm(forms.Form):
     text = forms.CharField()
 
 
-class IngredientForm(ModelForm):
-    class Meta:
-        model = Ingredient
-        fields = ['name', 'category', 'density', 'calories_per_each', 'calories_per_gram']
+class IngredientForm(forms.Form):
+    name = forms.CharField(label='name', max_length=255)
+    category = forms.CharField(label='category', max_length=255)
+    density = forms.DecimalField(min_value=0, decimal_places=8, label='density', required=False)
+    calories_per_each = forms.IntegerField(min_value=0, label='calories by item', required=False)
+    calories_per_gram = forms.IntegerField(min_value=0, label='calories by weight', required=False)
+
+# class IngredientForm(ModelForm):
+#     class Meta:
+#         model = Ingredient
+#         fields = ['name', 'category', 'density', 'calories_per_each', 'calories_per_gram']
+#         

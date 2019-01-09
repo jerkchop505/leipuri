@@ -114,7 +114,9 @@ def recipe_edit(request, recipe_id):
 
 def ingredient_edit(request, ingredient_id):
     ingredient = Ingredient.objects.get(id=ingredient_id)
-    form = IngredientForm(request.POST, instance=ingredient_id)
+    form = IngredientForm(request.POST)
+    form.fields['name'].required = False
+    form.fields['category'].required = False
     context = {
         "ingredient": ingredient,
         "form": form
@@ -123,8 +125,13 @@ def ingredient_edit(request, ingredient_id):
         if form.is_valid():
             fd = form.cleaned_data
             i = Ingredient.objects.get(id=ingredient_id)
-            for k, v in fd.items():
-                i[k] = v
+            i.name = fd['name'] if fd['name'] is not '' else i.name
+            i.category = fd['category'] if fd['category'] is not '' else i.category
+            i.density = fd['density'] if fd['density'] is not '' else i.density
+            if fd['calories_per_each'] is not '':
+                i.calories_per_each = fd['calories_per_each']
+            if fd['calories_per_gram'] is not '':
+                i.calories_per_gram = fd['calories_per_gram']
             i.save()
             return HttpResponseRedirect(reverse('ingredient_edit', args=(ingredient.id,)))
     return render(request, 'resepti/add_elements_to_ingredient.html', context)
