@@ -1,0 +1,41 @@
+{% extends '../layouts/edit_view.html' %}
+{% block title %}Edit Recipe{% endblock %}
+{% block heading %}Recipe{% endblock %}
+{% block content %}
+    {% block section_heading1 %}Ingredients in recipe:{% endblock %}
+    {% block section_body1 %}
+        {% for ingred in ingred_amounts %}
+            {% if ingred.quantity > 0 %}
+                <div>{{ ingred.quantity }}:  {{ ingred.ingredient.name }}</div>
+            {% elif ingred.weight > 0 %}
+                <div>{{ ingred.weight }}g:  {{ingred.ingredient.name }}</div>
+            {% endif %}
+        {% endfor %}
+    {% endblock %}
+
+    {% block section_heading2 %}Steps in recipe:{% endblock %}
+    {% block section_body2 %}
+        {% for step in steps %}
+            <div>{{ step.number }}:  {{ step.text }}</div>
+        {% endfor %}
+    {% endblock %}
+
+    {% block section_heading3 %}Ingredients to add:{% endblock %}
+    {% block section_body3 %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ i_form }}
+            <input type="Submit" name="add-ingredient" value="Add Ingredient">
+        </form>
+    {% endblock %}
+
+    {% block section_heading4 %}Steps to add:{% endblock %}
+    {% block section_body4 %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ s_form }}
+            <input type="Submit" name="add-step" value="Add Step">
+        </form>
+    {% endblock %}
+    {% block return_url %}{% url 'recipe_detail' recipe.id %}{% endblock %}
+{% endblock %}

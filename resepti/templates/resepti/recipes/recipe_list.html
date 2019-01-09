@@ -1,0 +1,12 @@
+{% extends '../layouts/list_view.html' %}
+{% block title %}Recipe Index{% endblock %}
+{% block content %}
+    {% for recipe in recipes %}
+        <h3>
+            {% if recipe.category == category %}
+            <a href="recipe/{{ recipe.id }}">{{ recipe.name|title }}</a>
+            {% endif %}
+        </h3>
+        <br>
+    {% endfor %}
+{% endblock %}

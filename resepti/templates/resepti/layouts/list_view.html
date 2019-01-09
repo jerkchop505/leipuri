@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Generic List View{% endblock %}</title>
+</head>
+<body>
+    <div>
+        {% for category in categories %}
+            <h1>{{ category|title }}</h1>
+            {% block content %}{% endblock %}
+        {% endfor %}
+    </div>
+</body>
+</html>

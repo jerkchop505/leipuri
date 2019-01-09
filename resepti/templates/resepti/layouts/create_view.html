@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Entry page</title>
+    <title>{% block title %}Entry page{% endblock %}</title>
 </head>
 <body>
-    <form action="{% url recipe_list %}" method="get">
+    <form action="{% block backurl %}{% url 'recipe_list' %}{% endblock %}" method="get">
         <input type="Submit" value="Back">
     </form>
     <form action="" method="post">

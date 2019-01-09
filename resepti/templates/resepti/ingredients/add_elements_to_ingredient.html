@@ -1,36 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Data to {{ ingredient.name|title }}</title>
-</head>
-<body>
-    <div>
-        <h1>
-            {{ ingredient.name|title }}
-        </h1>
-    </div>
-    <div>
-        <h3>
-            Ingredient info:
-        </h3>
-        <div>
-            Category: {{ ingredient.category }}
-        </div>
-        <div>
-            {{ ingredient.density }} g/ml3
-        </div>
+{% extends '../layouts/edit_view.html' %}
+{% block title %}Edit Ingredient{% endblock %}
+{% block heading %}Ingredient{% endblock %}
+{% block content %}
+    {% block section_heading1 %}{{ingredient.name}}:{% endblock %}
+    {% block section_body1 %}
+        Density: {{ ingredient.density }} g/ml3
         {% if ingredient.calories_per_each %}
             <div>{{ ingredient.calories_per_each }} calories per each serving</div>
         {% else %}
             <div>{{ ingredient.calories_per_gram }} calories per gram</div>
         {% endif %}
-    </div>
-    <div>
-        <h3>
-            Data to change:
-        </h3>
-    </div>
-    <div>
+    {% endblock %}
+
+    {% block section_heading2 %}Fields to edit:{% endblock %}
+    {% block section_body2 %}
         <form action="" method="post">
             {% csrf_token %}
             {% for field in form %}
@@ -39,6 +22,5 @@
             {% endfor %}
             <input type="Submit" name="edit-ingredient" value="Edit Ingredient">
         </form>
-    </div>
-</body>
-</html>
+    {% endblock %}
+{% endblock %}
