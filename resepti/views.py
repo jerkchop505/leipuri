@@ -18,7 +18,7 @@ def recipe_detail(request, recipe_id):
         'ingredients': ingredients,
         'steps': steps
     }
-    return render(request, 'resepti/recipe_detail.html', context)
+    return render(request, 'resepti/recipes/recipe_detail.html', context)
 
 
 def recipe_list(request):
@@ -28,7 +28,7 @@ def recipe_list(request):
         'recipes': recipes,
         'categories': categories
     }
-    return render(request, 'resepti/recipe_list.html', context)
+    return render(request, 'resepti/recipes/recipe_list.html', context)
 
 
 def ingredient_list(request):
@@ -39,7 +39,7 @@ def ingredient_list(request):
         'categories': categories,
         'ingredients': ingredients
     }
-    return render(request, 'resepti/ingredient_list.html', context)
+    return render(request, 'resepti/ingredients/ingredient_list.html', context)
 
 
 def recipe_create(request):
@@ -53,7 +53,7 @@ def recipe_create(request):
     context = {
         'form': form
     }
-    return render(request, 'resepti/create_recipe.html', context)
+    return render(request, 'resepti/recipes/create_recipe.html', context)
 
 
 def ingredient_create(request):
@@ -73,7 +73,7 @@ def ingredient_create(request):
     context = {
         'form': form
     }
-    return render(request, 'resepti/create_ingredient.html', context)
+    return render(request, 'resepti/ingredients/create_ingredient.html', context)
 
 
 def recipe_edit(request, recipe_id):
@@ -109,7 +109,7 @@ def recipe_edit(request, recipe_id):
             )
             step.save()
         return HttpResponseRedirect(reverse('recipe_edit', args=(recipe.id,)))
-    return render(request, 'resepti/add_elements_to_recipe.html', context)
+    return render(request, 'resepti/recipes/add_elements_to_recipe.html', context)
 
 
 def ingredient_edit(request, ingredient_id):
@@ -134,4 +134,4 @@ def ingredient_edit(request, ingredient_id):
                 i.calories_per_gram = fd['calories_per_gram']
             i.save()
             return HttpResponseRedirect(reverse('ingredient_edit', args=(ingredient.id,)))
-    return render(request, 'resepti/add_elements_to_ingredient.html', context)
+    return render(request, 'resepti/ingredients/add_elements_to_ingredient.html', context)

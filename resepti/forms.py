@@ -1,5 +1,4 @@
 from django import forms
-from django.forms import ModelForm
 from .models import Ingredient
 
 
@@ -25,9 +24,3 @@ class IngredientForm(forms.Form):
     density = forms.DecimalField(min_value=0, decimal_places=8, label='density', required=False)
     calories_per_each = forms.IntegerField(min_value=0, label='calories by item', required=False)
     calories_per_gram = forms.IntegerField(min_value=0, label='calories by weight', required=False)
-
-# class IngredientForm(ModelForm):
-#     class Meta:
-#         model = Ingredient
-#         fields = ['name', 'category', 'density', 'calories_per_each', 'calories_per_gram']
-#         

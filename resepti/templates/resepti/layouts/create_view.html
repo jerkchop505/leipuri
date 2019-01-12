@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{% block title %}Entry page{% endblock %}</title>
-</head>
-<body>
-    <form action="{% block backurl %}{% url 'recipe_list' %}{% endblock %}" method="get">
-        <input type="Submit" value="Back">
-    </form>
+{% extends './base.html' %}
+{% block mainpagecontent %}
     <form action="" method="post">
         {% csrf_token %}
         {% for field in form %}
@@ -17,5 +10,4 @@
         {% endfor %}
         <input type="Submit" value="Create">
     </form>
-</body>
-</html>
+{% endblock mainpagecontent %}

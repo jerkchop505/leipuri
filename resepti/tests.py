@@ -1,3 +1,4 @@
 from django.test import TestCase
 
-# Create your tests here.
+# insert test here
+from .models import Recipe
