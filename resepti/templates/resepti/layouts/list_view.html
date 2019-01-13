@@ -1,7 +1,9 @@
 {% extends './base.html' %}
 {% block mainpagecontent %}
     {% for category in categories %}
-        <h1>{{ category|title }}</h1>
-        {% block content %}{% endblock %}
+        <div class="content">
+            <strong><div class='content is-large'>{{ category|title }}</div></strong>
+            {% block content %}{% endblock %}
+        </div>
     {% endfor %}
 {% endblock mainpagecontent %}

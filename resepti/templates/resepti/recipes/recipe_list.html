@@ -2,11 +2,10 @@
 {% block title %}Recipe Index{% endblock %}
 {% block content %}
     {% for recipe in recipes %}
-        <h3>
+        <div class="container is-medium">
             {% if recipe.category == category %}
             <a href="recipe/{{ recipe.id }}">{{ recipe.name|title }}</a>
             {% endif %}
-        </h3>
-        <br>
+        </div>
     {% endfor %}
 {% endblock %}

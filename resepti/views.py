@@ -23,7 +23,8 @@ def recipe_detail(request, recipe_id):
 
 def recipe_list(request):
     recipes = Recipe.objects.all()
-    categories = ['appetizer', 'entree', 'side', 'bread', 'dessert']
+    categories = [recipe.category for recipe in recipes]
+    categories = list(set(categories))
     context = {
         'recipes': recipes,
         'categories': categories

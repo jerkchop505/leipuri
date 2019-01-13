@@ -1,54 +1,46 @@
-<!DOCTYPE html>
-<html>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-<head>
-    <title>Add data to {% block title %}thing{% endblock %}</title>
-</head>
-<body>
-    <div>
-        <h1>
-            {% block heading %}Edit{{ ingredient.name|title }}{% endblock %}
-        </h1>
-    </div>
-    {% block content1 %}
+{% extends './base.html' %}
+    {% block mainpagecontent %}
         <div>
-            <h3>
-                {% block section_heading1 %}{% endblock %}
-            </h3>
-            {% block section_body1 %}{% endblock %}
+            <h1>
+                {% block heading %}Edit{{ ingredient.name|title }}{% endblock %}
+            </h1>
         </div>
-    {% endblock %}
+        {% block content1 %}
+            <div>
+                <h3>
+                    {% block section_heading1 %}{% endblock %}
+                </h3>
+                {% block section_body1 %}{% endblock %}
+            </div>
+        {% endblock %}
 
-    {% block content2 %}
-        <div>
-            <h3>
-                {% block section_heading2 %}{% endblock %}
-            </h3>
-            {% block section_body2 %}{% endblock %}
-        </div>
-    {% endblock %}
+        {% block content2 %}
+            <div>
+                <h3>
+                    {% block section_heading2 %}{% endblock %}
+                </h3>
+                {% block section_body2 %}{% endblock %}
+            </div>
+        {% endblock %}
 
-    {% block content3 %}
-        <div>
-            <h3>
-                {% block section_heading3 %}{% endblock %}
-            </h3>
-            {% block section_body3 %}{% endblock %}
-        </div>
-    {% endblock %}
+        {% block content3 %}
+            <div>
+                <h3>
+                    {% block section_heading3 %}{% endblock %}
+                </h3>
+                {% block section_body3 %}{% endblock %}
+            </div>
+        {% endblock %}
 
-    {% block content4 %}
-        <div>
-            <h3>
-                {% block section_heading4 %}{% endblock %}
-            </h3>
-            {% block section_body4 %}{% endblock %}
-        </div>
-    {% endblock %}
-    <form action={% block return_url %}{% endblock %}>
-        <input type="Submit" value="Done">
-    </form>
-</body>
-</html>
+        {% block content4 %}
+            <div>
+                <h3>
+                    {% block section_heading4 %}{% endblock %}
+                </h3>
+                {% block section_body4 %}{% endblock %}
+            </div>
+        {% endblock %}
+        <form action={% block return_url %}{% endblock %}>
+            <input type="Submit" value="Done">
+        </form>
+    {% endblock mainpagecontent %}
